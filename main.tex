@@ -83,14 +83,14 @@ If \(\omega\) is 1 or \(-1\) the two corresponding eigenvectors coincide, so the
 \begin{center}
 \begin{tabular}{@{}ccc@{}}\toprule
 Graph&Theorem 2.12 bound&Actual\\\midrule
-\(Q_4\)&4&4\\
+\(Q_3\)&4&4\\
 Peterson&4&4\\
 \(K_n\)&1&1\\
 \(C_n\)&\(\displaystyle \frac{n\cos\left(\frac{\floor*{\frac n2}}n2\pi i\right)}{\cos\left(\frac{\floor*{\frac n2}}n2\pi i\right)-1}\)&\(\displaystyle\floor*{\frac n2}\)\\
 \bottomrule
 \end{tabular}
 \end{center}
-When \(n\) is even the bound is met.
+When \(n\) is even the bound for \(C_n\) is met.
 
 \item Let \(G\) be a graph such that every two distinct vertices have exactly two common neighbours.
 
@@ -125,7 +125,7 @@ which is integral only if \(a\) is 1, 2 or 4, which implies \(k\) is 3, 6 or 18.
 
 \item Pick a vertex \(u\) in \(G\). Its orbit has size \(n\). Pick a neighbour \(v\) of \(u\). Under the stabiliser of \(u\) it must be mapped to a neighbour of \(u\) so its orbit has size at most 3.
 
-Now pick a new point \(a\) adjacent to some previously chosen point \(b\). The point \(b\) is adjacent to some point chosen before it, so \(a\) must be sent to one of the other neighbours of \(b\). If \(b\) has degree \(2\) then \(a\) is fixed as the unique other neighbour of \(b\) and does not contribute to the size of the automorphism group, so pick a new \(a\) in the same way as before and repeat until you get a \(b\) with degree \(3\) (or the graph is exhausted). Then \(a\) must be sent to one of the two other neighbours of \(b\). This fixes the third neighbour of \(b\) as well. Since \(G\) is connected if we continue in this fashion we will eventually have fixed every point in \(G\). Each step of the process fixes at least two points and contributes a factor of at most 2 to the size of \(\aut G\). Hence the total contribution after every vertex has been fixed is at most \(2^{\frac{n-2}2}\). The size of \(\aut G\) is therefore at most \(3n2^{\frac{n-2}2}\)
+Now pick a new point \(a\) adjacent to some previously chosen point \(b\). If \(a\) is already fixed pick a new point until you pick some \(a\) that is not fixed adjacent to some previously chosen point \(b\). The point \(b\) has a fixed neighbour so it must have degree \(3\), since if it had degree \(2\) then \(a\) would be fixed as the unique other neighbour of \(b\). Then \(a\) must be sent to one of the two other neighbours of \(b\). This determines where the third neighbour of \(b\) gets sent as well. Since \(G\) is connected if we continue in this fashion we will eventually have fixed every point in \(G\). Each step of the process fixes at least two points and contributes a factor of 2 to the size of \(\aut G\). Hence the total contribution after every vertex has been fixed is at most \(2^{\frac{n-2}2}\). The size of \(\aut G\) is therefore at most \(3n2^{\frac{n-2}2}\)
 
 \item \(K_4\) and \(K_{3,3}\) meet the bound since
 \begin{gather*}
@@ -133,11 +133,23 @@ Now pick a new point \(a\) adjacent to some previously chosen point \(b\). The p
 \abs{\aut K_{3,3}}=2!\cdot3!\cdot3!=3(6)2^{\frac{6-2}2}.
 \end{gather*}
 
-\item If \(G\) has a vertex of degree less than 3, we can pick it as the first vertex in the process above and the bound becomes \(2n2^{\frac{n-2}2}\), so \(G\) must be 3-regular.
+\item If \(G\) is not vertex-transitive we have \(m<n\) choices for the first vertex in the process above and the bound becomes \(3m2^{\frac{n-2}2}\), so \(G\) must be vertex-transitive.
 
-Similarly if \(G\) is not vertex-transitive we have \(m<n\) choices for the first vertex in the process above and the bound becomes \(3m2^{\frac{n-2}2}\), so \(G\) must be vertex-transitive.
+If \(G\) has a vertex of degree \(m<3\), we can pick it as the first vertex in the process above and the bound becomes \(mn2^{\frac{n-2}2}\), so \(G\) must be 3-regular.
 
+For the bound to be exact each step of the process must fix exactly two points. In particular, in the last step of the process, there must be exactly two points that are not fixed and hence have the same closed neighbourhood if they are adjacent and open neighbourhood if they are not.
 
+Therefore any graph for which the bound is exact must have one of the two graphs below as a subgraph:
+\begin{center}
+\includegraphics[valign=c, width=3cm]{g}\hspace{3em}\includegraphics[valign=c, width=3cm]{k}
+\end{center}
+In the first graph the middle vertices belong to at least two 3-cycles, so by transitivity every vertex must belong to at least two 3-cycles. The only way to make the left and right vertices belong to at least two 3-cycles is to join them with an edge, which yields \(K_4\).
+
+In the second graph the top vertex is adjacent to two vertices that have the same open neighbourhood, so by transitivity the left vertex must be adjacent to two vertices that have the same open neighbourhood. By symmetry pick the top and middle vertices. Their third common neighbour cannot be the bottom vertex since the graph must be 3-regular. Therefore we have the following subgraph:
+\begin{center}
+\includegraphics[valign=c, width=3cm]{kl}
+\end{center}
+The left vertex is in at least four 4-cycles, so by vertex transitivity the bottom vertex must be in at least four 4-cycles, which is only possible if it connects to the top-right vertex, yielding \(K_{3,3}\).
 
 \end{enumerate}
 
